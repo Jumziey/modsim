@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "common.h"
-////#include "pcorr.h"
-#include "vcorr.h"
+#include "pcorr.h"
+//#include "vcorr.h"
 
 
 char *progname;
@@ -178,7 +178,7 @@ void run(Par *par)
 	      step(par, pos, vel, force);
       }
 
-      measure_pcorr(par->n, &par->L, pos);
+      measure_pcorr(&par->L, pos);
 
       measure(par->n, &par->L, pos, vel, &epot, &ekin);
       if (estream) fprintf(estream, "%d %g\n", isamp + nsamp * iblock, epot + ekin);

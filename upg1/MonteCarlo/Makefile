@@ -8,9 +8,9 @@ CFLAGS = -g -O4
 LOADLIBES = -lm
 
 # The executable "lang" needs the following object files.
-mcar: mcar.o ran.o common.o vcorr.o conf.o
+mcar: mcar.o ran.o common.o pcorr.o conf.o
 
 # These object files depend on the following header files:
-mcar.o common.o vcorr.o conf.o: common.h vcorr.h Vec.h ran.h
+mcar.o common.o vcorr.o conf.o: common.h pcorr.h Vec.h ran.h
 
 ran.o: ran.c ran.h

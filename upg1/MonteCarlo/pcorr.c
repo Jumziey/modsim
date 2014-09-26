@@ -3,7 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include "Vec.h"
-#include "vcorr.h"
+#include "pcorr.h"
 
 static double bsize = 0.02;
 static int Rmax = 5;
@@ -23,14 +23,15 @@ void measure_pcorr(Vec *L,Vec *pos)
 {
   int i,j;
   Vec *dist;
+  double d;
   
   calls += 1;
   
   for(i=0; i<np; i++) 
     for(j=0; j<np; j++) 
-      dist = sqrt(dist2(L, pos+i, pos+j, dist));
-      if(dist<Rmax)
-        h[rint(dist/bsize)] += 1/(np*np);
+      d = sqrt(dist2(L, pos+i, pos+j, dist));
+      if(d<Rmax)
+        h[(int)nearbyint(d/bsize)] += 1/(np*np);
   return;
 }
 
@@ -61,8 +62,8 @@ void write_pcorr(char *wname)
   }
 
   fprintf(stream, "# t pcorr\n");
-  for (i = 0; i < maxt; i++)
-    fprintf(stream, "%g  %g  %d\n", i*bsize, pcorr[i]);
+  for (i = 0; i < hsize; i++)
+    fprintf(stream, "%g  %g \n", i*bsize, pcorr[i]);
 
   fclose(stream);
   printf("Position correlations written to %s\n", filename);
