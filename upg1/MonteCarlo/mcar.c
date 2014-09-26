@@ -169,7 +169,7 @@ void run(Par *par)
 
   nstep = rint(1.0 / par->deltat);
   
-  init_pcorr(par->n);
+  init_pcorr();
   for (iblock = 0; iblock < nblock; iblock++) {
 
     for (i = 0; i < NV; i++) v0[i] = 0.0;
@@ -178,7 +178,7 @@ void run(Par *par)
 	      step(par, pos, vel, force);
       }
 
-      measure_pcorr(&par->L, pos);
+      measure_pcorr(par->n, &par->L, pos);
 
       measure(par->n, &par->L, pos, vel, &epot, &ekin);
       if (estream) fprintf(estream, "%d %g\n", isamp + nsamp * iblock, epot + ekin);
@@ -207,7 +207,7 @@ void run(Par *par)
   write_conf(par->n, pos, vel, "conf/", wfile);
 
   // Write velocity correlation results to files.
-  write_pcorr(wfile);
+  write_pcorr(par->n, wfile);
   // write_pcorr(par->n, wfile);
 
   // Print out some results
