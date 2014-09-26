@@ -159,24 +159,26 @@ void run(Par *par)
   printf("\nSimulate %d blocks x %d samples each: ", par->nblock, par->nsamp);
   fflush(stdout);
 
-  init_vcorr(par->n, par->deltat, 0.1, 5.0);
-
+  
   // Initialize for measuring a histogram of particle distances for
   // distances up to 5.0 and bin size 0.02.
   // init_pcorr(par->n, 0.02, 5.0);
+ 
+  
   for (i = 0; i < NV; i++) v1[i] = v2[i] = 0.0;
 
   nstep = rint(1.0 / par->deltat);
+  
+  init_pcorr(par->n);
   for (iblock = 0; iblock < nblock; iblock++) {
 
     for (i = 0; i < NV; i++) v0[i] = 0.0;
     for (isamp = 0; isamp < nsamp; isamp++) {
       for (istep = 0; istep < nstep; istep++) {
 	      step(par, pos, vel, force);
-	      measure_vcorr(par->n, vel);
       }
 
-      // measure_pcorr(par->n, &par->L, pos);
+      measure_pcorr(par->n, &par->L, pos);
 
       measure(par->n, &par->L, pos, vel, &epot, &ekin);
       if (estream) fprintf(estream, "%d %g\n", isamp + nsamp * iblock, epot + ekin);
@@ -205,7 +207,7 @@ void run(Par *par)
   write_conf(par->n, pos, vel, "conf/", wfile);
 
   // Write velocity correlation results to files.
-  write_vcorr(par->n, wfile);
+  write_pcorr(wfile);
   // write_pcorr(par->n, wfile);
 
   // Print out some results
