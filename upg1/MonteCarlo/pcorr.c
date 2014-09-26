@@ -25,6 +25,7 @@ void measure_pcorr(Vec *L,Vec *pos)
   Vec *dist;
   double d;
   
+  printf("here\n");
   calls += 1;
   
   for(i=0; i<np; i++) 
@@ -32,6 +33,8 @@ void measure_pcorr(Vec *L,Vec *pos)
       d = sqrt(dist2(L, pos+i, pos+j, dist));
       if(d<Rmax)
         h[(int)nearbyint(d/bsize)] += 1/(np*np);
+        
+  printf("done\n");
   return;
 }
 
