@@ -1,0 +1,51 @@
+--- Langevin dynamics of a Lennard-Jones gas ---
+Gas with 50 particles at T = 1, Delta time = 0.0001, Step size = 0.300.
+Box with size 14.000 x 14.000
+Seed for random number generator: 0.
+Read from conf/start50 with data for 50 particles.
+
+Simulate 2 blocks x 100 samples each: 1 2 
+Configuration with 50 particles written to conf/mcar-0050_L14.00_T1.00_alpha0.01_dt000.
+Velocity correlations written to vcorr/mcar-0050_L14.00_T1.00_alpha0.01_dt000
+
+Potential E:  1.86772e+14 +/- 1.86772e+14
+--- Langevin dynamics of a Lennard-Jones gas ---
+Gas with 50 particles at T = 1, Delta time = 0.0001, Step size = 0.400.
+Box with size 14.000 x 14.000
+Seed for random number generator: 0.
+Read from conf/start50 with data for 50 particles.
+
+Simulate 2 blocks x 100 samples each: 1 2 
+Configuration with 50 particles written to conf/mcar-0050_L14.00_T1.00_alpha0.01_dt000.
+Velocity correlations written to vcorr/mcar-0050_L14.00_T1.00_alpha0.01_dt000
+
+Potential E:  1.9196e+06 +/- 1.91888e+06
+--- Langevin dynamics of a Lennard-Jones gas ---
+Gas with 50 particles at T = 1, Delta time = 0.0001, Step size = 0.500.
+Box with size 14.000 x 14.000
+Seed for random number generator: 0.
+Read from conf/start50 with data for 50 particles.
+
+Simulate 2 blocks x 100 samples each: 1 2 
+Configuration with 50 particles written to conf/mcar-0050_L14.00_T1.00_alpha0.01_dt000.
+Velocity correlations written to vcorr/mcar-0050_L14.00_T1.00_alpha0.01_dt000
+
+Potential E:  3.68592e+14 +/- 3.68592e+14
+--- Langevin dynamics of a Lennard-Jones gas ---
+Gas with 50 particles at T = 1, Delta time = 0.0001, Step size = 0.600.
+Box with size 14.000 x 14.000
+Seed for random number generator: 0.
+Read from conf/start50 with data for 50 particles.
+
+Simulate 2 blocks x 100 samples each: 1 2 
+Configuration with 50 particles written to conf/mcar-0050_L14.00_T1.00_alpha0.01_dt000.
+Velocity correlations written to vcorr/mcar-0050_L14.00_T1.00_alpha0.01_dt000
+
+Potential E:  3915.6 +/- 2801.24
+--- Langevin dynamics of a Lennard-Jones gas ---
+Gas with 50 particles at T = 1, Delta time = 0.0001, Step size = 0.700.
+Box with size 14.000 x 14.000
+Seed for random number generator: 0.
+Read from conf/start50 with data for 50 particles.
+
+Simulate 2 blocks x 100 samples each: 1 

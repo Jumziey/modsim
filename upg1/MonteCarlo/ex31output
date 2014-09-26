@@ -1,0 +1,11 @@
+--- Molecular dynamics of a Lennard-Jones gas ---
+Gas with 50 particles at T = 1, Delta time = 0.01, Step size = 0.670.
+Box with size 14.000 x 14.000
+Seed for random number generator: 0.
+Read from conf/start50 with data for 50 particles.
+
+Simulate 5 blocks x 100 samples each: 1 2 3 4 5 
+Configuration with 50 particles written to conf/mcar-0050_L14.00_T1.00_alpha0.00_dt010.
+Velocity correlations written to vcorr/mcar-0050_L14.00_T1.00_alpha0.00_dt010
+
+Potential E:  -0.727389 +/- 0.0042606
