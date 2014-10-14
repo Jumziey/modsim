@@ -9,8 +9,7 @@
 static double bsize = 0.02;
 static int Rmax = 5;
 static int hsize = 250;
-static int calls;
-double *h;
+static double *h;
 
 // One dimensional distance (to the closest mirror point)
 double distance55(double L, double r1, double r2)
@@ -38,7 +37,6 @@ double dist255(Vec *L, Vec *p1, Vec *p2, Vec *dist)
 void init_pcorr()
 {
   h = calloc(hsize,sizeof(double));
-  calls = 0;
   return;
 }
 
@@ -49,13 +47,13 @@ void measure_pcorr(int n,Vec *L,Vec *pos)
   double d;
   
 
-  calls += 1;
+
   
   for(i=0; i<n; i++) 
-    for(j=0; j<n; j++) {
+    for(j=i; j<n; j++) {
       if(i!=j) {
-        d = dist255(L, pos+i, pos+j, &dist);
-        if(d<Rmax) {
+        d = sqrt(dist255(L, pos+i, pos+j, &dist));
+        if(d<=Rmax) {
           h[(int)nearbyint(d/bsize)] += 1;
         }
       }
@@ -100,5 +98,4 @@ void write_pcorr(int n,char *wname)
   free(filename);
 
   free(h);
-  calls = 0;
 }

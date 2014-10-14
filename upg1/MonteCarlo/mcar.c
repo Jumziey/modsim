@@ -164,12 +164,12 @@ void run(Par *par)
   // distances up to 5.0 and bin size 0.02.
   // init_pcorr(par->n, 0.02, 5.0);
  
-  
+  init_pcorr();
   for (i = 0; i < NV; i++) v1[i] = v2[i] = 0.0;
 
   nstep = rint(1.0 / par->deltat);
   
-  init_pcorr();
+  
   for (iblock = 0; iblock < nblock; iblock++) {
 
     for (i = 0; i < NV; i++) v0[i] = 0.0;
@@ -178,7 +178,7 @@ void run(Par *par)
 	      step(par, pos, vel, force);
       }
 
-      measure_pcorr(par->n, &par->L, pos);
+      
 
       measure(par->n, &par->L, pos, vel, &epot, &ekin);
       if (estream) fprintf(estream, "%d %g\n", isamp + nsamp * iblock, epot + ekin);
@@ -194,8 +194,10 @@ void run(Par *par)
 
     printf("%d ", iblock + 1);	fflush(stdout);
   }
+  
   printf("\n");
-
+ 
+  
   if (estream) fclose(estream);
 
   for (i = 0; i < NV; i++) {
@@ -206,6 +208,7 @@ void run(Par *par)
   // Write configuration to the named file.
   write_conf(par->n, pos, vel, "conf/", wfile);
 
+  measure_pcorr(par->n, &par->L, pos);
   // Write velocity correlation results to files.
   write_pcorr(par->n, wfile);
   // write_pcorr(par->n, wfile);
