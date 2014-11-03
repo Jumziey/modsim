@@ -3,4 +3,4 @@ Ex1
 2. 70
 3. ---
 4. Small with higih derivates, big with small derivates
-5. ?
+5. ode45 - 0.04, ode23s - 0.02, ode15s - 0.02
