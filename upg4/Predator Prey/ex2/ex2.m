@@ -10,14 +10,19 @@ tsmooth = 200;
 t = [0 20];
 rs = 0.8;
 fs = 0.2;
-odes = {@ode45 @ode23s @ode15s};
+odes = {@ode15s};
+alphas = [4 20 80];
 
 
-for i = 1:3
+for i = 1:size(alphas,2)
+	alpha = alphas(i);
   figure(i);
-  ode = odes{i};
+  ode = odes{1};
   opts = odeset('Stats','on');
   sol = ode(@rabbitfox, t, [rs;fs],opts);
+	disp('###############');
+	sol.stats
+	disp('###############');
   subplot(3,2,1);
   plot(sol.x,sol.y);
   title('Non Deval - Rabbit v Foxes');
@@ -64,6 +69,6 @@ for i = 1:3
   axis equal
   axis off
   
-  suptitle(char(odes{i}))
+  suptitle(sprintf('%s alpha = %d',char(odes{1}),alpha))
 end
 

@@ -1,0 +1,5 @@
+Timestep 0.012
+	Without knowing more indept about the solvers i saw no other option then to use the smallest timestep ever used by the matlab solvers. But only as a starting point to see if the implemented algorithms remain stable. (same alpha ofc)
+
+Alpha argument
+	Alpha period relation max around around twenty. In order to capture this behavior in a blanced way a value somewhere between 0 and 20 should intuitivly be used. Settled on 8 cause i didn't wanna use the obvious number 10. 

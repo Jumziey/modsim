@@ -1,0 +1,6 @@
+nfailed		alpha
+28				4
+69				20
+1310			80
+
+Conclusion: Exponential relationship

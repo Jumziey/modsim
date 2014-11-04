@@ -1,0 +1,6 @@
+Ex1
+1. around the same amount as alpha up to 20
+2. 70
+3. ---
+4. Small with higih derivates, big with small derivates
+5. ode45 - 0.0475, ode23s - 0.0131, ode15s - 0.0219

@@ -2,7 +2,7 @@ clear all;
 hold off;
 close all;
 global alpha
-alpha = 1;
+alpha = 8;
 
 ts = 0;
 te = 20;
@@ -13,7 +13,7 @@ fs = 0.2;
 odes = {@ode45 @ode23s @ode15s};
 
 
-for i = 1:3
+for i = 1:size(odes,2);
   figure(i);
   ode = odes{i};
   opts = odeset('Stats','on');
@@ -26,6 +26,9 @@ for i = 1:3
   hold on
   plot(sol.x(1:end-1),diff(sol.x), 'r')
   legend('Rabbits','Foxes', 'Timestep size');
+
+	mint(i) = min(diff(sol.x)); %Finding the smallest time step used
+	maxt(i) = max(diff(sol.x)); %Finding the largest time step used
 
   subplot(3,2,2);
   plot(sol.y(1,:),sol.y(2,:))
@@ -58,6 +61,7 @@ for i = 1:3
   xlabel('Timestep')
   ylabel('Lyapunov constant')
   
+	disp(sprintf('%s lyapunov drift: %f',char(odes{i}),max(H)-min(H)))
   subplot(3,2,6)
   im = imread('cat.bmp');
   image(im);
@@ -67,3 +71,5 @@ for i = 1:3
   suptitle(char(odes{i}))
 end
 
+Smallest_timestep = min(mint)
+Biggest_timestep = max(maxt)
