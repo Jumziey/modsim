@@ -25,18 +25,18 @@ for i = 1:size(alphas,2)
 	disp('###############');
   subplot(3,2,1);
   plot(sol.x,sol.y);
-  title('Non Deval - Rabbit v Foxes');
+  title('Non Deval - Prey v Predator');
   xlabel('Timestep')
   ylabel('Relative quantity')
   hold on
   plot(sol.x(1:end-1),diff(sol.x), 'r')
-  legend('Rabbits','Foxes', 'Timestep size');
+  legend('Prey','Predator', 'Timestep size');
 
   subplot(3,2,2);
   plot(sol.y(1,:),sol.y(2,:))
   title('Non Deval - Phase Plot');
-  xlabel('Rabbits')
-  ylabel('Foxes')
+  xlabel('Prey')
+  ylabel('Predator')
   axis equal
 
   t = linspace(ts,te,tsmooth);
@@ -44,15 +44,15 @@ for i = 1:size(alphas,2)
 
   subplot(3,2,3);
   plot(t,sol.y);
-  title('Rabbit v Foxes');
-  legend('Rabbits','Foxes');
+  title('Prey v Predators');
+  legend('Prey','Predators');
   xlabel('Timestep')
   ylabel('Relative quantity')
   subplot(3,2,4);
   plot(sol.y(1,:),sol.y(2,:))
   title('Phase Plot');
-  xlabel('Rabbits')
-  ylabel('Foxes')
+  xlabel('Prey')
+  ylabel('Predators')
   axis equal
 
   %Lyapunov

@@ -20,12 +20,12 @@ for i = 1:size(odes,2);
   sol = ode(@rabbitfox, t, [rs;fs],opts);
   subplot(3,2,1);
   plot(sol.x,sol.y);
-  title('Non Deval - Rabbit v Foxes');
+  title('Non Deval - Prey v Predators');
   xlabel('Timestep')
   ylabel('Relative quantity')
   hold on
   plot(sol.x(1:end-1),diff(sol.x), 'r')
-  legend('Rabbits','Foxes', 'Timestep size');
+  legend('Prey','Predators', 'Timestep size');
 
 	mint(i) = min(diff(sol.x)); %Finding the smallest time step used
 	maxt(i) = max(diff(sol.x)); %Finding the largest time step used
@@ -33,8 +33,8 @@ for i = 1:size(odes,2);
   subplot(3,2,2);
   plot(sol.y(1,:),sol.y(2,:))
   title('Non Deval - Phase Plot');
-  xlabel('Rabbits')
-  ylabel('Foxes')
+  xlabel('Prey')
+  ylabel('Predators')
   axis equal
 
   t = linspace(ts,te,tsmooth);
@@ -42,15 +42,15 @@ for i = 1:size(odes,2);
 
   subplot(3,2,3);
   plot(t,sol.y);
-  title('Rabbit v Foxes');
-  legend('Rabbits','Foxes');
+  title('Prey v Predators');
+  legend('Prey','Predators');
   xlabel('Timestep')
   ylabel('Relative quantity')
   subplot(3,2,4);
   plot(sol.y(1,:),sol.y(2,:))
   title('Phase Plot');
-  xlabel('Rabbits')
-  ylabel('Foxes')
+  xlabel('Prey')
+  ylabel('Predators')
   axis equal
 
   %Lyapunov

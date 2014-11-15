@@ -26,12 +26,12 @@ hold on
 plot(N,X(2,:))
 xlabel('Time')
 ylabel('Population')
-legend('Rabbits','Foxes')
+legend('Prey','Predators')
 
 subplot(3,1,2)
 plot(X(2,:),X(1,:))
-xlabel('Foxes')
-ylabel('Rabbits')
+xlabel('Predators')
+ylabel('Prey')
 axis equal
 
 subplot(3,1,3)
@@ -60,12 +60,12 @@ hold on
 plot(N,X(2,:))
 xlabel('Time')
 ylabel('Population')
-legend('Rabbits','Foxes')
+legend('Prey','Predators')
 
 subplot(3,1,2)
 plot(X(2,:),X(1,:))
-xlabel('Foxes')
-ylabel('Rabbits')
+xlabel('Predators')
+ylabel('Prey')
 axis equal
 
 subplot(3,1,3)
@@ -96,12 +96,12 @@ hold on
 plot(N,X(2,:))
 xlabel('Time')
 ylabel('Population')
-legend('Rabbits','Foxes')
+legend('Prey','Predators')
 
 subplot(3,1,2)
 plot(X(2,:),X(1,:))
-xlabel('Foxes')
-ylabel('Rabbits')
+xlabel('Predators')
+ylabel('Prey')
 axis equal
 
 subplot(3,1,3)
