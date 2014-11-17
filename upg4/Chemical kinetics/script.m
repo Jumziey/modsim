@@ -8,7 +8,7 @@ alpha = 77.27;
 beta = 8.375*10^(-6);
 gamma = 1.161;
 
-t = [0 ;360];
+t = [0 ;60];
 tsmooth = 80000;
 x0 = [1 ;2; 3];
 chemkin = @(t,x) [alpha*(x(2)+x(1)*(1-beta*x(1)-x(2)));
@@ -21,13 +21,15 @@ chemJac = @(t,x) [alpha-2*alpha*beta*x(1)-alpha*x(2) alpha-alpha*x(1) 0;
                   -x(2)/alpha -1/alpha-x(1)/alpha 1/alpha;
                   gamma 0 -gamma];
                
-odes = {@ode15s @ode23s @ode45};
+odes = {@ode45};
 for i = 1:size(odes,2);
-  tic
+  
   figure(i)
   ode = odes{i};
   opts = odeset('Stats','on', 'Jacobian', chemJac);
+  tic
   sol = ode(chemkin, t, x0,opts);
+  toc
   tline = linspace(t(1),t(2),tsmooth);
   sol.y = deval(sol,tline);
   plot3(sol.y(1,:),sol.y(2,:),sol.y(3,:));
@@ -35,7 +37,7 @@ for i = 1:size(odes,2);
   soln(i).y = sol.y;
   soln(i).x = sol.x;
   soln(i).stats = sol.stats;
-  toc
+  
 end
 
 j = i;

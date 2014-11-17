@@ -42,7 +42,7 @@ jac_vdp (double t, const double y[], double *dfdy,
 int
 main () {
   // you can use any stepper here
-  const gsl_odeiv2_step_type * T = gsl_odeiv2_step_rk4imp;
+  const gsl_odeiv2_step_type * T = gsl_odeiv2_step_rk2imp;
   gsl_odeiv2_step * s    = gsl_odeiv2_step_alloc (T, 2);
   gsl_odeiv2_control * c = gsl_odeiv2_control_y_new (1e-6, 0.0);
   gsl_odeiv2_evolve * e  = gsl_odeiv2_evolve_alloc (2);
@@ -69,9 +69,9 @@ main () {
   gsl_odeiv2_evolve_free (e);
   gsl_odeiv2_control_free (c);
   gsl_odeiv2_step_free (s);
-  printf("Number of Jacobian evaluations = %d\n"
-         "Number of Function evaluations = %d\n", pars.jac_count,
-  pars.count);
+  //printf("Number of Jacobian evaluations = %d\n"
+  //       "Number of Function evaluations = %d\n", pars.jac_count,
+  //pars.count);
   return 0;
 
 }
