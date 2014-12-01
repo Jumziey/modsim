@@ -1,85 +1,79 @@
 clear all
 close all
 
-c2im60jac =  41711;
-c2im60eval = 375400;
-c2im60time = 0.232;
-matlab2im60time = 1.063997;
 
-c2im360jac = 97065;
-c2im360eval = 873586;
-c2im360time = 0.588;
-matlab2im360time = 1.359101;
+solver1 = 'rk2imp';
+solver2 = 'rk4imp';
 
-c4im60jac =  5451;
-c4im60eval = 93818;
-c4im60time = 0.059;
-matlab4im60time = 182;
+i=0;
+for t = [60 360]
+	s1 = load(sprintf('%s_time=%d',solver1,t));
+	s2 = load(sprintf('%s_time=%d',solver2,t));
+	
+	figure(i+1)
+	subplot(3,1,1)
+	plotyy(s1(:,1),s1(:,2),s1(:,1),s1(:,3))
+	legend('x1','x2');
+	title(sprintf('%s t = %d',solver1,t));
+	subplot(3,1,2)
+	plotyy(s1(:,1),s1(:,2),s1(:,1),s1(:,4))
+	legend('x1','x3');
+	subplot(3,1,3)
+	plotyy(s1(:,1),s1(:,3),s1(:,1),s1(:,4))
+	legend('x2','x3');
+	
+	figure(i+2)
+	subplot(3,1,1)
+	plotyy(s2(:,1),s2(:,2),s2(:,1),s2(:,3))
+	legend('x1','x2');
+	title(sprintf('%s t = %d',solver2,t));
+	subplot(3,1,2)
+	plotyy(s2(:,1),s2(:,2),s2(:,1),s2(:,4))
+	legend('x1','x3');
+	subplot(3,1,3)
+	plotyy(s2(:,1),s2(:,3),s2(:,1),s2(:,4))
+	legend('x2','x3');
+	
+	
+	figure(i+3)
+	subplot(2,1,1)
+	plot3(s1(:,2),s1(:,3),s1(:,4))
+	title(sprintf('%s t = %d',solver1,t));
+	subplot(2,1,2)
+	plot3(s2(:,2),s2(:,3),s2(:,4))
+	title(sprintf('%s t = %d',solver2,t));
+	
+	figure(i+4)
+	subplot(2,1,1)
+	plot(s1(1:end-1,1),diff(s1(:,1)))
+	title(sprintf('%s t = %d',solver1,t));
+	%axis([0 t -1 1])
+	subplot(2,1,2)
+	plot(s2(1:end-1,1),diff(s2(:,1)))
+	title(sprintf('%s t = %d',solver2,t));
+	%axis([0 t -2 2])
+	
+	i = i+4;
+end
 
-c4im360jac = 13627;
-c4im360eval = 234080;
-c4im360time = 0.151;
-matlab4im360time = inf; 
 
 
-load chemkin2im60;
-load chemkin2im360;
-load chemkin4im60;
-load chemkin4im360;
+%rk4imp_time=60
+%	Number of Jacobian evaluations = 5451
+%	Number of Function evaluations = 93818
+%	Time elapsed: 0.027522 sec
+%rk2imp_time=60
+%	Number of Jacobian evaluations = 41711
+%	Number of Function evaluations = 375400
+%	Time elapsed: 0.109494 sec
 
-figure(1)
-subplot(2,1,1)
-plot3(chemkin2im360(:,2),chemkin2im360(:,3), chemkin2im360(:,4))
-title('T = 360');
-subplot(2,1,2)
-plot3(chemkin2im60(:,2),chemkin2im60(:,3), chemkin2im60(:,4))
-title('T = 60, second degree implicit');
-suplabel('Phase plots, 2nd degree solver')
-
-figure(2)
-subplot(3,1,1)
-plotyy(chemkin2im360(:,1),chemkin2im360(:,3), chemkin2im360(:,1), chemkin2im360(:,4))
-legend('x3','x4')
-xlabel('Time')
-ylabel('Value')
-title('T = 360');
-subplot(3,1,2)
-plotyy(chemkin2im360(:,1),chemkin2im360(:,2), chemkin2im360(:,1), chemkin2im360(:,4))
-legend('x2','x4')
-xlabel('Time')
-ylabel('Value')
-subplot(3,1,3)
-plotyy(chemkin2im360(:,1),chemkin2im360(:,2), chemkin2im360(:,1), chemkin2im360(:,3))
-legend('x2','x3')
-xlabel('Time')
-ylabel('Value')
-
-
-figure(3)
-subplot(2,1,1)
-plot3(chemkin4im360(:,2),chemkin4im360(:,3), chemkin4im360(:,4))
-title('T = 360');
-subplot(2,1,2)
-plot3(chemkin4im60(:,2),chemkin4im60(:,3), chemkin4im60(:,4))
-title('T = 60, second degree implicit');
-suplabel('Phase plots, 4th degree solver')
-
-figure(4)
-subplot(3,1,1)
-plotyy(chemkin4im360(:,1),chemkin4im360(:,3), chemkin4im360(:,1), chemkin4im360(:,4))
-legend('x3','x4')
-xlabel('Time')
-ylabel('Value')
-title('T = 360');
-subplot(3,1,2)
-plotyy(chemkin4im360(:,1),chemkin4im360(:,2), chemkin4im360(:,1), chemkin4im360(:,4))
-legend('x2','x4')
-xlabel('Time')
-ylabel('Value')
-subplot(3,1,3)
-plotyy(chemkin4im360(:,1),chemkin4im360(:,2), chemkin4im360(:,1), chemkin4im360(:,3))
-legend('x2','x3')
-xlabel('Time')
-ylabel('Value')
+%rk2imp_time=360
+%	Number of Jacobian evaluations = 97065
+%	Number of Function evaluations = 873586
+%	Time elapsed: 0.284457 sec
+%rk4imp_time=360
+%	Number of Jacobian evaluations = 13627
+%	Number of Function evaluations = 234080
+%	Time elapsed: 0.071636 sec
 
 

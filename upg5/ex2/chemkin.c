@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_odeiv2.h>
@@ -65,6 +66,11 @@ main () {
   double beta = 8.375;
   double gamma = 1.161;
   beta = pow(beta,-6);
+  
+  FILE *ofp;
+  char str[80];
+	double tot_t;
+	clock_t start_t, end_t;
   // you can use any stepper here
   const gsl_odeiv2_step_type * T = gsl_odeiv2_step_rk4imp;
   gsl_odeiv2_step * s    = gsl_odeiv2_step_alloc(T, 3);
@@ -76,12 +82,17 @@ main () {
   gsl_odeiv2_driver * d = gsl_odeiv2_driver_alloc_y_new(&sys, T, 1e-6, 1e-6, 1e-6 );
   gsl_odeiv2_step_set_driver(s, d);
      
-  double t = 0.0, t1 = 60.0;
+  double t = 0.0, t1 = 360.0;
   double h = 1e-6;
   double x[3] = { 1.0, 2.0, 3.0 };
   
   double t2 = t;
   double interval = 0.01;
+  
+  sprintf(str,"rk4imp_time=%.f",t1);
+	ofp = fopen(str,"w");
+		
+	start_t = clock();
   while (t < t1)
   {
     int status = gsl_odeiv2_evolve_apply (e, c, s, &sys, &t, t1, &h, x);
@@ -89,17 +100,20 @@ main () {
     if (status != GSL_SUCCESS)
       break;
     if(t > t2+interval) {
-      printf ("%.5e %.5e %.5e %.5e\n", t, x[0], x[1], x[2]);
+      fprintf(ofp,"%.5e %.5e %.5e %.5e\n", t, x[0], x[1], x[2]);
       t2 = t;
     }
   }
+  end_t = clock();
+	tot_t = (double)(end_t-start_t)/CLOCKS_PER_SEC;
   
   gsl_odeiv2_evolve_free (e);
   gsl_odeiv2_control_free (c);
   gsl_odeiv2_step_free (s);
-  fprintf(stderr,"Number of Jacobian evaluations = %d\n"
-       "Number of Function evaluations = %d\n", pars.jac_count,
- pars.count);
+ 	printf("%%%s\n",str);
+	printf("%%\tNumber of Jacobian evaluations = %d\n"
+     "%%\tNumber of Function evaluations = %d\n"
+     "%%\tTime elapsed: %f sec\n", pars.jac_count,pars.count,tot_t);
   return 0;
 
 }
