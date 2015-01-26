@@ -7,9 +7,12 @@ int
 main()
 {
 	double hs = 0.1;
+	double h;
+	double l = 0.3;
 	int step = 200;
-	int i;
-	char str[100];
+	int i,j;
+	char str[13];
+	FILE *ofp;
   
 	double alpha = 2;
 	
@@ -17,10 +20,10 @@ main()
 	double* r = malloc(sizeof(double)*step);
 	double* f = malloc(sizeof(double)*step);
 		
-  for(j=1;j<200;j++)
+  for(j=1;j<36;j++)
   {
   	h = hs*j;
-  	sprintf(str,"eulA_h=%.2f",h);
+  	sprintf(str,"eulA_h=%1.2f",h);
 		ofp = fopen(str,"w");
 	
 		r[0] = 1;

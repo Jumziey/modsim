@@ -5,11 +5,14 @@ MU = [1 2 18];
 i = 1;
 solver1	= 'rk2imp';
 solver2 = 'bsimp';
+interMeth = 'pchip';
+interRes = 0.0001;
 for mu = MU
 	
 	s1 = load(sprintf('%s_%d',solver1,mu));;
 	s2 = load(sprintf('%s_%d',solver2,mu));
 	
+	%X and Y vs Time
 	figure(1)
 	subplot(3,2,i)
 	plot(s1(:,1),s1(:,2), 'b')
@@ -22,6 +25,7 @@ for mu = MU
 	plot(s2(:,1),s2(:,3), 'g')
 	title(sprintf('%s \\mu = %d',solver2,mu));
 	
+	%Phase Plot
 	figure(2)
 	subplot(3,2,i)
 	plot(s1(:,2),s1(:,3))
@@ -30,13 +34,47 @@ for mu = MU
 	plot(s2(:,2),s2(:,3))
 	title(sprintf('%s \\mu = %d',solver2,mu));
 	
+	%Time step plot
 	figure(3)
 	subplot(3,2,i)
-	plot(s1(1:end-1,1),diff(s1))
+	plot(s1(1:end-1,1),diff(s1(:,1)), 'g.')
+	hold on
+	plot(s1(1:end-1,1),diff(s1(:,1)))
 	title(sprintf('%s \\mu = %d',solver1,mu));
 	subplot(3,2,i+1)
-	plot(s2(1:end-1,1),diff(s2))
+	plot(s2(1:end-1,1),diff(s2(:,1)),'g.')
+	hold on;
+	plot(s2(1:end-1,1),diff(s2(:,1)))
 	title(sprintf('%s \\mu = %d',solver2,mu));
+	
+	%X and Y vs Time - Interpolated
+	figure(4)
+	subplot(3,2,i)
+	s1q1t = (min(s1):interRes:max(s1))';
+	s1q1x = interp1(s1(:,1), s1(:,2), s1q1t, interMeth);
+	s1q1y = interp1(s1(:,1), s1(:,3), s1q1t, interMeth);
+	plot(s1q1t,s1q1x, 'b')
+	hold on
+	s2q1t = (min(s2):interRes:max(s2))';
+	s2q1x = interp1(s2(:,1), s2(:,2), s2q1t, interMeth);
+	s2q1y = interp1(s2(:,1), s2(:,3), s2q1t, interMeth);
+	plot(s1q1t,s1q1y, 'g')
+	title(sprintf('%s \\mu = %d',solver1,mu));
+	subplot(3,2,i+1)
+	plot(s2q1t,s2q1x, 'b')
+	hold on
+	plot(s2q1t,s2q1y, 'g')
+	title(sprintf('%s \\mu = %d',solver2,mu));
+	
+	%Phase plot - Interpolated
+	figure(5)
+	subplot(3,2,i)
+	plot(s1q1x,s1q1y)
+	title(sprintf('%s \\mu = %d',solver1,mu));
+	subplot(3,2,i+1)
+	plot(s2q1x,s2q1y)
+	title(sprintf('%s \\mu = %d',solver2,mu));
+	
 	
 	i = i+2;
 end

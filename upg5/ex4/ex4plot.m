@@ -1,20 +1,22 @@
 clear all
 close all
 
-load predpreyEulerData
-p = predpreyEulerData;
+i= 1;
+for h = 0.1:0.1:0.3;
+	p = load(sprintf('eulA_h=%1.2f',h))
 
-figure(1)
-plot(p(:,1),p(:,2))
-hold on
-plot(p(:,1),p(:,3), 'r')
-legend('Prey','Predators')
+	figure(i)
+	plot(p(:,1),p(:,2))
+	hold on
+	plot(p(:,1),p(:,3), 'r')
+	legend('Prey','Predators')
 
-xlabel('Time')
-ylabel('Population')
+	xlabel('Time')
+	ylabel('Population')
 
-figure(2)
-plot(p(:,2),p(:,3))
-xlabel('Prey population')
-ylabel('Predator population')
-
+	figure(i+1)
+	plot(p(:,2),p(:,3))
+	xlabel('Prey population')
+	ylabel('Predator population')
+	i = i+2
+end
